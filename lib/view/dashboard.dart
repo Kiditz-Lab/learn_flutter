@@ -20,6 +20,7 @@ class Dashboard extends StatelessWidget {
               itemCount: products.length,
               itemBuilder: (context, index) => ListTile(
                 title: Text(products[index].name),
+                subtitle: Text('\$${products[index].price}'),
               ),
             ),
             error: (exception) => Center(

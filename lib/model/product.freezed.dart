@@ -21,6 +21,8 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Product {
   String get name => throw _privateConstructorUsedError;
+  String get price => throw _privateConstructorUsedError;
+  List<Image> get images => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -32,7 +34,7 @@ abstract class $ProductCopyWith<$Res> {
   factory $ProductCopyWith(Product value, $Res Function(Product) then) =
       _$ProductCopyWithImpl<$Res, Product>;
   @useResult
-  $Res call({String name});
+  $Res call({String name, String price, List<Image> images});
 }
 
 /// @nodoc
@@ -49,12 +51,22 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   @override
   $Res call({
     Object? name = null,
+    Object? price = null,
+    Object? images = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<Image>,
     ) as $Val);
   }
 }
@@ -66,7 +78,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       __$$ProductImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name});
+  $Res call({String name, String price, List<Image> images});
 }
 
 /// @nodoc
@@ -81,12 +93,22 @@ class __$$ProductImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
+    Object? price = null,
+    Object? images = null,
   }) {
     return _then(_$ProductImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<Image>,
     ));
   }
 }
@@ -94,7 +116,9 @@ class __$$ProductImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ProductImpl implements _Product {
-  _$ProductImpl({this.name = '-'});
+  _$ProductImpl(
+      {this.name = '-', this.price = '', final List<Image> images = const []})
+      : _images = images;
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductImplFromJson(json);
@@ -102,10 +126,21 @@ class _$ProductImpl implements _Product {
   @override
   @JsonKey()
   final String name;
+  @override
+  @JsonKey()
+  final String price;
+  final List<Image> _images;
+  @override
+  @JsonKey()
+  List<Image> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
 
   @override
   String toString() {
-    return 'Product(name: $name)';
+    return 'Product(name: $name, price: $price, images: $images)';
   }
 
   @override
@@ -113,12 +148,15 @@ class _$ProductImpl implements _Product {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductImpl &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.price, price) || other.price == price) &&
+            const DeepCollectionEquality().equals(other._images, _images));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name);
+  int get hashCode => Object.hash(
+      runtimeType, name, price, const DeepCollectionEquality().hash(_images));
 
   @JsonKey(ignore: true)
   @override
@@ -135,12 +173,19 @@ class _$ProductImpl implements _Product {
 }
 
 abstract class _Product implements Product {
-  factory _Product({final String name}) = _$ProductImpl;
+  factory _Product(
+      {final String name,
+      final String price,
+      final List<Image> images}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
   @override
   String get name;
+  @override
+  String get price;
+  @override
+  List<Image> get images;
   @override
   @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>

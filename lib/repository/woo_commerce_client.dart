@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class WooCommerceClient {
   final dio = Dio();
@@ -12,6 +13,7 @@ class WooCommerceClient {
         headers: {
           'Authorization': 'Basic $base64Encode',
         });
+    dio.interceptors.addAll([PrettyDioLogger(responseBody: false)]);
   }
 
   Future<Response<T>> get<T>(
