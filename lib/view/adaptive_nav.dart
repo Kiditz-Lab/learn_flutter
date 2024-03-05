@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/components/change_theme_view.dart';
 import 'package:learn_flutter/components/responsive.dart';
 
+final _mobileKey = GlobalKey<ScaffoldState>();
+
 class AdaptiveNav extends StatelessWidget {
   final Widget? child;
   const AdaptiveNav({super.key, this.child});
@@ -32,25 +34,7 @@ class _DesktopView extends StatelessWidget {
       ),
       body: Row(
         children: [
-          Drawer(
-            width: 250,
-            child: ListView(
-              children: const [
-                ListTile(
-                  leading: Icon(Icons.dashboard_outlined),
-                  title: Text('Dashboard'),
-                ),
-                ListTile(
-                  leading: Icon(Icons.home_outlined),
-                  title: Text('Home'),
-                ),
-                ListTile(
-                  leading: Icon(Icons.person_2_outlined),
-                  title: Text('Profile'),
-                )
-              ],
-            ),
-          ),
+          const _MainDrawer(),
           Expanded(
             child: child!,
           ),
@@ -75,6 +59,8 @@ class _MobileViewState extends State<_MobileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _mobileKey,
+      drawer: const _MainDrawer(),
       appBar: AppBar(
         title: const Text('My App'),
         actions: const [
@@ -112,6 +98,51 @@ class _MobileViewState extends State<_MobileView> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             label: 'Profile',
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _MainDrawer extends StatelessWidget {
+  const _MainDrawer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      width: 250,
+      child: ListView(
+        children: [
+          ListTile(
+            onTap: () {
+              if (_mobileKey.currentState?.isDrawerOpen == true) {
+                _mobileKey.currentState?.closeDrawer();
+              }
+              context.go('/dashboard');
+            },
+            leading: const Icon(Icons.dashboard_outlined),
+            title: const Text('Dashboard'),
+          ),
+          ListTile(
+            onTap: () {
+              context.go('/home');
+              if (_mobileKey.currentState?.isDrawerOpen == true) {
+                _mobileKey.currentState?.closeDrawer();
+              }
+            },
+            leading: const Icon(Icons.home_outlined),
+            title: const Text('Home'),
+          ),
+          ListTile(
+            onTap: () {
+              if (_mobileKey.currentState?.isDrawerOpen == true) {
+                _mobileKey.currentState?.closeDrawer();
+              }
+              context.go('/profile');
+            },
+            leading: const Icon(Icons.person_2_outlined),
+            title: const Text('Profile'),
           )
         ],
       ),
