@@ -20,4 +20,15 @@ class ProductRepository {
       return left(e);
     }
   }
+
+  Future<Either<DioException, Tag>> addTag(TagRequest request) async {
+    try {
+      final response =
+          await _client.post('/products/tags', data: request.toJson());
+
+      return right(Tag.fromJson(response.data));
+    } on DioException catch (e) {
+      return left(e);
+    }
+  }
 }

@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/components/change_theme_view.dart';
 import 'package:learn_flutter/components/responsive.dart';
 
-final _mobileKey = GlobalKey<ScaffoldState>();
+final mainKey = GlobalKey<ScaffoldState>();
 
 class AdaptiveNav extends StatelessWidget {
   final Widget? child;
@@ -25,6 +25,7 @@ class _DesktopView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: mainKey,
       appBar: AppBar(
         centerTitle: false,
         title: const Text('My App'),
@@ -59,7 +60,7 @@ class _MobileViewState extends State<_MobileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _mobileKey,
+      key: mainKey,
       drawer: const _MainDrawer(),
       appBar: AppBar(
         title: const Text('My App'),
@@ -116,8 +117,8 @@ class _MainDrawer extends StatelessWidget {
         children: [
           ListTile(
             onTap: () {
-              if (_mobileKey.currentState?.isDrawerOpen == true) {
-                _mobileKey.currentState?.closeDrawer();
+              if (mainKey.currentState?.isDrawerOpen == true) {
+                mainKey.currentState?.closeDrawer();
               }
               context.go('/dashboard');
             },
@@ -127,8 +128,8 @@ class _MainDrawer extends StatelessWidget {
           ListTile(
             onTap: () {
               context.go('/home');
-              if (_mobileKey.currentState?.isDrawerOpen == true) {
-                _mobileKey.currentState?.closeDrawer();
+              if (mainKey.currentState?.isDrawerOpen == true) {
+                mainKey.currentState?.closeDrawer();
               }
             },
             leading: const Icon(Icons.home_outlined),
@@ -136,8 +137,8 @@ class _MainDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              if (_mobileKey.currentState?.isDrawerOpen == true) {
-                _mobileKey.currentState?.closeDrawer();
+              if (mainKey.currentState?.isDrawerOpen == true) {
+                mainKey.currentState?.closeDrawer();
               }
               context.go('/profile');
             },

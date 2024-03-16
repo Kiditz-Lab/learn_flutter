@@ -22,3 +22,27 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'price': instance.price,
       'images': instance.images,
     };
+
+_$TagRequestImpl _$$TagRequestImplFromJson(Map<String, dynamic> json) =>
+    _$TagRequestImpl(
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$$TagRequestImplToJson(_$TagRequestImpl instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+    };
+
+_$TagImpl _$$TagImplFromJson(Map<String, dynamic> json) => _$TagImpl(
+      id: json['id'] as int? ?? -1,
+      name: json['name'] as String? ?? '',
+      slug: json['slug'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$TagImplToJson(_$TagImpl instance) => <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'slug': instance.slug,
+      'description': instance.description,
+    };

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learn_flutter/repository/product_repository.dart';
-import 'package:learn_flutter/repository/woo_commerce_client.dart';
+import 'package:learn_flutter/injector.dart';
 import 'package:learn_flutter/service/cubit/product_list_cubit.dart';
 
 class ProductListView extends StatelessWidget {
@@ -10,8 +9,7 @@ class ProductListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ProductListCubit(ProductRepository(WooCommerceClient())),
+      create: (context) => Injector.resolve<ProductListCubit>(),
       child: BlocBuilder<ProductListCubit, ProductListState>(
         builder: (context, state) {
           return state.maybeWhen(
