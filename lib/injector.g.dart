@@ -15,6 +15,8 @@ class _$Injector extends Injector {
       ..registerFactory((c) => ProductTagFormCubit(c<ProductRepository>()))
       ..registerSingleton((c) => ProductListCubit(c<ProductRepository>()))
       ..registerSingleton((c) => ProductRepository(c<WooCommerceClient>()))
+      ..registerFactory((c) => CustomerRepository(c<WooCommerceClient>()))
+      ..registerFactory((c) => CustomerListCubit(c<CustomerRepository>()))
       ..registerSingleton((c) => WooCommerceClient());
   }
 }

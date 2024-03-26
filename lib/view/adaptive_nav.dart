@@ -71,6 +71,12 @@ class _MobileViewState extends State<_MobileView> {
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navIndex,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        selectedLabelStyle:
+            TextStyle(color: Theme.of(context).colorScheme.primary),
+        unselectedItemColor: Theme.of(context).colorScheme.primaryContainer,
+        unselectedLabelStyle:
+            TextStyle(color: Theme.of(context).colorScheme.primaryContainer),
         onTap: (value) {
           setState(() {
             navIndex = value;
@@ -84,6 +90,9 @@ class _MobileViewState extends State<_MobileView> {
               break;
             case 2:
               context.go('/profile');
+              break;
+            case 3:
+              context.go('/customers');
               break;
           }
         },
@@ -99,6 +108,10 @@ class _MobileViewState extends State<_MobileView> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people_outline),
+            label: 'Customers',
           )
         ],
       ),
@@ -144,6 +157,16 @@ class _MainDrawer extends StatelessWidget {
             },
             leading: const Icon(Icons.person_2_outlined),
             title: const Text('Profile'),
+          ),
+          ListTile(
+            onTap: () {
+              if (mainKey.currentState?.isDrawerOpen == true) {
+                mainKey.currentState?.closeDrawer();
+              }
+              context.go('/customers');
+            },
+            leading: const Icon(Icons.person_2_outlined),
+            title: const Text('Customers'),
           )
         ],
       ),

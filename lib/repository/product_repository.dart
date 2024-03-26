@@ -25,7 +25,6 @@ class ProductRepository {
     try {
       final response =
           await _client.post('/products/tags', data: request.toJson());
-
       return right(Tag.fromJson(response.data));
     } on DioException catch (e) {
       return left(e);

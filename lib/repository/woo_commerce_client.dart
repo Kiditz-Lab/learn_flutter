@@ -34,6 +34,23 @@ class WooCommerceClient {
     );
   }
 
+  Future<Response<T>> delete<T>(
+    String path, {
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onReceiveProgress,
+  }) {
+    return dio.delete(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: options,
+      cancelToken: cancelToken,
+    );
+  }
+
   Future<Response<T>> post<T>(
     String path, {
     Object? data,

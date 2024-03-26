@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:learn_flutter/view/adaptive_nav.dart';
+import 'package:learn_flutter/view/customer_list.dart';
 import 'package:learn_flutter/view/dashboard.dart';
 import 'package:learn_flutter/view/home.dart';
 import 'package:learn_flutter/view/profile.dart';
@@ -27,7 +28,11 @@ final router = GoRouter(
         GoRoute(
           path: '/dashboard',
           builder: (context, state) => const Dashboard(),
-        )
+        ),
+        GoRoute(
+          path: '/customers',
+          builder: (context, state) => const CustomerListView(),
+        ),
       ],
     ),
   ],

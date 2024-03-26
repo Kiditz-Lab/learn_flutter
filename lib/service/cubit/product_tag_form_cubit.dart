@@ -26,14 +26,10 @@ class ProductTagFormCubit extends Cubit<ProductTagFormState> {
           await _repository.addTag(TagRequest(name: state.tag.value));
       result.fold(
         (exception) => emit(
-          state.copyWith(
-            status: FormzSubmissionStatus.failure,
-          ),
+          state.copyWith(status: FormzSubmissionStatus.failure),
         ),
         (tag) => emit(
-          state.copyWith(
-            status: FormzSubmissionStatus.success,
-          ),
+          state.copyWith(status: FormzSubmissionStatus.success),
         ),
       );
     }

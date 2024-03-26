@@ -4,9 +4,14 @@ import 'package:formz/formz.dart';
 import 'package:learn_flutter/injector.dart';
 import 'package:learn_flutter/service/cubit/product_tag_form_cubit.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -18,6 +23,9 @@ class Home extends StatelessWidget {
             if (state.status.isSuccess) {
               ScaffoldMessenger.of(context)
                   .showSnackBar(const SnackBar(content: Text('Sukses cuk!!')));
+            } else if (state.status.isFailure) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text('Gagal cuk!!')));
             }
           },
           child: const Column(
@@ -41,7 +49,7 @@ class _TagInput extends StatelessWidget {
     return BlocBuilder<ProductTagFormCubit, ProductTagFormState>(
       buildWhen: (previous, current) => previous.tag != current.tag,
       builder: (context, state) {
-        return TextField(
+        return TextFormField(
           decoration: InputDecoration(
             labelText: 'Tag Name',
             errorText: state.tag.isNotValid ? 'Tag name is required' : null,
