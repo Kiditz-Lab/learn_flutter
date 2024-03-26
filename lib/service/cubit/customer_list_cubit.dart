@@ -30,7 +30,6 @@ class CustomerListCubit extends Cubit<CustomerListState> {
   }
 
   void deleteCustomer(int id) async {
-    print('Customer $id');
     emit(state.copyWith(status: ApiStatus.loading));
     final result = await _repository.deleteCustomer(id);
     result.fold((_) => emit(state.copyWith(status: ApiStatus.error)), (r) {
